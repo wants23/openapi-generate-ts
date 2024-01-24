@@ -1,0 +1,17 @@
+{
+  "name": "swagger-generate-ts",
+  "version": "1.0.0",
+  "description": "基于 swagger2.0 文档自动生成 Typescript Interface 和接口请求",
+  "main": "index.js",
+  "author": "wants23",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "node postinstall-script.js"
+  },
+  "files": [
+    "postinstall-script.js"
+  ],
+  "dependencies": {
+    "prettier": "^2.6.0"
+  }
+}
