@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "wants23",
   "license": "MIT",
+  "bin": {
+    "swagger2.0-generate-ts": "index.js"
+  },
   "scripts": {
     "postinstall": "node postinstall-script.js",
     "generate": "node index.js"
