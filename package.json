@@ -1,21 +1,24 @@
 {
   "name": "swagger2.0-generate-ts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "基于 swagger2.0 文档自动生成 Typescript Interface 和接口请求",
-  "main": "index.js",
+  "main": "dist/cjs.js",
+  "type": "module",
   "author": "wants23",
   "license": "MIT",
   "bin": {
-    "swagger2.0-generate-ts": "index.js"
+    "generator-ts": "index.js"
   },
   "scripts": {
     "postinstall": "node postinstall-script.js",
-    "generate": "node index.js"
+    "generator": "node index.js",
+    "build": "rollup --config"
   },
   "files": [
     "postinstall-script.js"
   ],
-  "dependencies": {
-    "prettier": "^2.6.0"
+  "devDependencies": {
+    "prettier": "^2.6.0",
+    "rollup": "^4.13.0"
   }
 }

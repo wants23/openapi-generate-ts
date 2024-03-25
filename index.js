@@ -1,4 +1,13 @@
 const fs = require('fs');
+const path = require('path');
+
+// 获取当前工作目录
+const rootDirectory = process.cwd();
+
+// 生成配置文件路径
+const configFilePath = path.join(rootDirectory, '.generate-ts-config.json');
+
+
 const {
   clearStringSpace,
   httpsgetJson,
@@ -8,7 +17,6 @@ const {
   generateFetchFunction,
   createNestedDirectories,
   formatFile,
-  getGenerateTSConfig
 } = require('./common');
 
 const currentData = {
@@ -16,19 +24,21 @@ const currentData = {
 };
 (async () => {
   try {
-    const { swaggerUrl, outputPath } = getGenerateTSConfig()
+    // 读取配置文件内容
+    const { swaggerUrl, outputPath } = JSON.parse(fs.readFileSync(configFilePath, 'utf8'))
+    console.log('1111', swaggerUrl, outputPath);
 
     if (!swaggerUrl) {
-      console.error('swaggerUrl is required! generate fail----');
+      console.error('generate fail: 请检查 .generate-ts-config.json 配置文件中的 swaggerUrl 是否配置! ');
       process.exit(1);
     }
 
     if (!outputPath) {
-      console.error('swaggerUrl is required! generate fail----');
+      console.error('generate fail: 请检查 .generate-ts-config.json 配置文件中的 outputPath 是否配置! ');
       process.exit(1);
     }
 
-    console.log('generator api start---!')
+    console.log('generate ts start---!')
 
     const swaggerData = await httpsgetJson(swaggerUrl);
     const { definitions = {}, paths = {}, tags = [] } = swaggerData || {};
@@ -106,7 +116,7 @@ const currentData = {
       fs.writeFileSync(`${outputPath}/${fileName}.ts`, fileAllContent);
     }
 
-    console.log('generator api success---!')
+    console.log('generate ts success---!')
   } catch (error) {
     console.log(`Error reding file ${error} `, error, currentData);
   }
